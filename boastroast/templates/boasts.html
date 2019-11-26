@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block main %}
+<div>
+    {% for post in posts %}
+    <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.type_of_post }}</h5>
+              <p class="card-text">{{ post.body }}</p>
+              <p>{{ post.created_at}}</p>
+            <div style="display: flex; justify-content: space-between">
+                    <a href="/upvote/{{post.id}}" class="btn btn-success">Upvote</a>
+                    <a href="/downvote/{{post.id}}" class="btn btn-danger">Downvote</a>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+</div>
+{% endblock %}
