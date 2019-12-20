@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+django-bootstrap4 = "*"
+django = "*"
 
 [requires]
 python_version = "3.8"
