@@ -11,8 +11,8 @@ class PostForm(forms.ModelForm):
     ]
 
     post = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={'placeholder': 'Post', 'class': 'form-control'}))
-    post_type = forms.ChoiceField(choices=POST_CHOICES)
+    type_of_post = forms.ChoiceField(choices=POST_CHOICES)
     
     class Meta:
         model = Post
-        fields = ['post', 'post_type']
+        fields = ['post', 'type_of_post']
