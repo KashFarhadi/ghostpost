@@ -23,9 +23,5 @@ class Post(models.Model):
         vote_score = self.upvotes - self.downvotes
         return vote_score
  
-
     def __str__(self):
         return self.body
-
-def magicString():
-    character = string.ascii_lower

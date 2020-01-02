@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm
 from .models import Post
+from django.db.models import F
 
 
 def homepage(request):
@@ -32,13 +33,15 @@ def downvote(request, element_id):
     return redirect('/')
 
 def boasts(request):
-    posts = Post.objects.filter(type_of_post = 'Boast')
+    posts = Post.objects.filter(type_of_post = 'Boast').order_by('-created_at')
     return render(request, 'boasts.html', {'posts': posts})
 
 def roasts(request):
-    posts = Post.objects.filter(type_of_post = 'Roast')
+    posts = Post.objects.filter(type_of_post = 'Roast').order_by('-created_at')
     return render(request, 'roasts.html', {'posts': posts})
 
 def highestvoted(request):
-    posts = Post.objects.order_by('-upvotes')
+    votes_with_score = Post.objects.annotate(vote_score=(F('upvotes')-F('downvotes')))
+    posts = votes_with_score.order_by('-vote_score')
+
     return render(request, 'highestvoted.html', {'posts': posts})
