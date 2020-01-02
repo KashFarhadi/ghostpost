@@ -1,4 +1,6 @@
 from django.db import models
+import computed_property
+
 
 class Post(models.Model):
     Boast = 'Boast'
@@ -14,6 +16,18 @@ class Post(models.Model):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     type_of_post = models.CharField(choices=POST_CHOICES, default=Boast, max_length=5)
+    score = computed_property.ComputedIntegerField(compute_from='get_score')
+
+    @property
+    def get_score(self):
+        vote_score = self.upvotes - self.downvotes
+        if vote_score >=0:
+            return vote_score
+        else:
+            return 0
 
     def __str__(self):
         return self.body
+
+def magicString():
+    character = string.ascii_lower

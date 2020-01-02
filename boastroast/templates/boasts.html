@@ -3,6 +3,7 @@
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% block main %}
+
 <div>
     {% for post in posts %}
     <div class="card" style="width: 18rem;">
@@ -10,9 +11,10 @@
               <h5 class="card-title">{{ post.type_of_post }}</h5>
               <p class="card-text">{{ post.body }}</p>
               <p>{{ post.created_at}}</p>
-            <div style="display: flex; justify-content: space-between">
-                    <a href="/upvote/{{post.id}}" class="btn btn-success">Upvote</a>
-                    <a href="/downvote/{{post.id}}" class="btn btn-danger">Downvote</a>
+              <div class="alert alert-info" role="alert">Current Score: {{ post.score }}</div>
+              <div style="display: flex; justify-content: space-between">
+                    <a href="/upvote/{{post.id}}" class="btn btn-success">Upvote {{ post.upvotes}} </a> 
+                    <a href="/downvote/{{post.id}}" class="btn btn-danger">Downvote {{ post.downvotes}}</a>
               </div>
             </div>
           </div>
