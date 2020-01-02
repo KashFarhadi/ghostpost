@@ -21,10 +21,8 @@ class Post(models.Model):
     @property
     def get_score(self):
         vote_score = self.upvotes - self.downvotes
-        if vote_score >=0:
-            return vote_score
-        else:
-            return 0
+        return vote_score
+ 
 
     def __str__(self):
         return self.body
